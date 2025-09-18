@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+.labelspace{
+  @apply flex flex-col space-y-4
+}
+
+.inputtag{
+  @apply block w-full rounded-md shadow-lg px-2 py-3 focus:ring-2 focus:ring-red-400   dark:bg-gray-100
+}
+
+.outlines{
+  @apply outline-gray-600
+}
+
+.thclass{
+  @apply lg:px-6 px-3 py-2  lg:py-3 
+}

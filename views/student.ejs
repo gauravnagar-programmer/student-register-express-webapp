@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link href="/stylesheets/output.css" rel="stylesheet">
+
+
+</head>
+
+<body>
+  <div class="flex flex-col bg-gray-500 w-full h-screen space-y-10 p-5">
+    <div class="flex items-center justify-between lg:text-sm md:text-xs text-[7px]">
+        
+            <div>
+            <a class="px-2 py-1  lg:text-[15px] bg-blue-500 rounded-lg  cursor-pointer w-fit text-white mt-5 font-bold outline-blue-700" href="/addstudent">Home</a> 
+        </div>
+            <form action="/findbyname" method="get"  class="   flex items-center ">
+                <p class=" hidden lg:flex md:flex text-white  lg:text-sm mr-3">sortby: </p>
+                <select name="sort" id="" class="   text-gray-700    bg-white  lg:px-3 px-2 py-1 lg:py-2  rounded-l-md ">
+                    <option value="studentname">name</option>
+                    <option value="className">class</option>
+                    <option value="rollno">rollno</option>
+                </select>
+                <input  name="findName" required placeholder="Search By name"  class=" bg-white outline-none px-2 py-1 lg:py-2 lg:px-3 w-[40%] lg:w-full md:w-full   " type="text">
+            <input type="submit"  class=" bg-linear-to-r/srgb from-indigo-500 cursor-pointer to-teal-400 text-white lg:px-3 lg:py-2 py-1 px-2 rounded-r-md outlines" placeholder="Search">
+
+            </form>
+            
+    </div>
+    <div class="flex items-center justify-between  text-white font-bold text-sm">
+      <h1 class="lg:text-3xl">All Student List</h1>
+      <h1>
+        Total Students : <%= allStudents.length %>
+      </h1>
+    </div>
+
+
+
+  
+
+<div class="relative text-center  overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full   text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead class="text-xs  text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+                <th scope="col" class="  lg:px-6 px-3 py-2 lg:text-xs text-[9px] lg:py-4">
+                    Student name
+                </th>
+                <th scope="col" class="lg:px-6 lg:text-xs px-3 py-2 text-[9px] lg:py-4">
+                    Class
+                </th>
+                <th scope="col" class="lg:px-6 lg:text-xs px-3 py-2 text-[9px] lg:py-4">
+                    Roll No
+                </th>
+               
+                <th scope="col" class="lg:px-6 lg:text-xs px-3 py-2 text-[9px] lg:py-4">
+                    Edit
+                </th>
+                <th scope="col" class="lg:px-6 lg:text-xs px-3 py-2 text-[9px] lg:py-4">
+                    Edit
+                </th>
+            </tr>
+        </thead>
+        <tbody class="">
+            <% if(allStudents.length >0){ %>
+
+                    <% allStudents.slice().reverse().forEach(student=>{ %>
+            <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700 border-gray-200">
+
+                <th scope="row" class="lg:px-6 px-3 py-2 text-[9px] lg:py-4 lg:text-xs font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <%= student.studentname %>
+                </th>
+                <td class="lg:px-6 px-3 py-2 text-[9px] lg:text-xs lg:py-4">
+                   <%= student.className %>
+                </td>
+                <td class="lg:px-6 px-3 py-2 text-[9px] lg:py-4 lg:text-xs">
+                    <%= student.rollno %>
+                </td>
+               
+                <td class="lg:px-6 px-3 py-2 text-[9px] lg:py-4 lg:text-xs">
+                    <a href="/delete/<%= student._id %>" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Delete</a>
+                </td>
+                <td class="lg:px-6 px-3 py-2 text-[9px] lg:py-4 lg:text-xs">
+                    <a href="/update/<%= student._id %>" class="font-medium text-blue-600 dark:text-yellow-500 hover:underline">Update</a>
+                </td>
+            </tr>
+
+                      <% }) %>
+
+          <%  }else{ %>
+            <div class="flex flex-col justify-center items-center space-y-3 mb-5 text-white">
+
+                <h1 class="   text-center ">No student register till now!</h1>
+                <a href="/addstudent" class="px-3 py-2 bg-blue-500 outline-none border-none rounded ">Add student</a>
+            </div>
+      <%  } %>
+          
+
+         
+          
+         
+        </tbody>
+    </table>
+</div>
+  </div>
+
+</body>
+
+</html>
